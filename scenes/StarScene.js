@@ -18,9 +18,9 @@ export class StarScene extends Phaser.Scene {
     }
 
     preload() {
-        if (location.host == 'easierbycode.github.io') {
-            this.load.setBaseURL('/squad-game/');
-        }
+
+        this.load.setBaseURL('https://easierbycode.github.io/squad-game/');
+        
         this.load.audio('audio_beam', '../assets/sounds/beam.mp3')
         this.load.audio('audio_explosion', '../assets/sounds/explosion.mp3')
         this.load.audio('audio_pickup', '../assets/sounds/pickup.mp3')
