@@ -24,7 +24,8 @@ export class StarScene extends Phaser.Scene {
         this.load.audio('audio_explosion', 'assets/sounds/explosion.mp3')
         this.load.audio('audio_pickup', 'assets/sounds/pickup.mp3')
         this.load.audio('rudy_saved', 'assets/sounds/rudy-saved.mp3')
-        this.load.image( 'bby-ship', 'assets/images/best-buy-ship.png')
+        // this.load.image( 'bby-ship', 'assets/images/best-buy-ship.png')
+        this.load.image( 'bby-ship', 'assets/images/tag.png')
         this.load.image( 'blue', 'assets/images/blue.png')
         this.load.image( 'geek-bullet', 'assets/images/geek-bullet.png')
         this.load.image( 'geek-car', 'assets/images/geek-car.png')
@@ -268,4 +269,5 @@ export class StarScene extends Phaser.Scene {
             }
         }
     }
+
 }
