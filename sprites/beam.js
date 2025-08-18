@@ -1,8 +1,10 @@
 
 export class Beam extends Phaser.GameObjects.Sprite {
     constructor(scene) {
-        let { x, y } = scene.player
-        y -= 16
+        // let { x, y } = scene.player
+        // y -= 16
+        let { x, y } = scene.player.getTopCenter()
+        y += 6
         super(scene, x, y, "beam")
         scene.add.existing(this)
         this.play("beam_anim")
@@ -46,4 +48,5 @@ export class Beam extends Phaser.GameObjects.Sprite {
           this.destroy()
         })
     }
+
   }
