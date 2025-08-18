@@ -63,7 +63,7 @@ export class Player extends Phaser.GameObjects.Sprite {
     this.scene = scene
 
     this.body.setCollideWorldBounds(true)
-    // this.setScale( 0.5 );
+    this.setScale( 2 );
     // this.emitter.startFollow(this)
 
     // scene.anims.create({
@@ -229,4 +229,5 @@ export class Player extends Phaser.GameObjects.Sprite {
     //     this.setFrame( 0 );
     // });
   }
+
 }
