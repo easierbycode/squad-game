@@ -1,6 +1,7 @@
 
 import { config } from "../js/config.js"
 import { CyberOctopus } from "../sprites/cyber-octopus.js";
+import { Explosion } from "../sprites/explosion.js";
 import { GeekCar } from "../sprites/geek-car.js";
 import { GeekStar } from "../sprites/geek-star.js";
 import { HeadphoneInvader } from "../sprites/headphone-invader.js";
@@ -168,8 +169,14 @@ export class StarScene extends Phaser.Scene {
         // enemy projectiles
         this.enemyProjectiles = this.add.group()
 
-        this.physics.add.overlap(this.enemyProjectiles, this.player, (e, p) => {
-            this.cameras.main.shake(100, 0.025)
+        this.physics.add.overlap(this.enemyProjectiles, this.player, (a, b) => {
+            let projectile = (a === this.player) ? b : a
+
+            if (projectile.texture.key === 'geek-bullet') {
+                this.startGeekStarTakeover(projectile)
+            } else if (!this.takeoverStarted) {
+                this.cameras.main.shake(100, 0.025)
+            }
         })
 
         // group to hold all our projectiles
@@ -217,11 +224,123 @@ export class StarScene extends Phaser.Scene {
         this.sentinels.add( this.geekstar )
 
         this.controllersLaunched = false;
+        this.takeoverStarted = false;
+    }
+
+    // player hit by a geek-star projectile: shake, flash, slow MK2-style
+    // cinematic zoom, player explodes into a million pieces, then geek-star
+    // takes over and we transport to the webpranks meteor scene
+    startGeekStarTakeover(projectile) {
+        if (this.takeoverStarted)  return;
+        this.takeoverStarted = true;
+
+        projectile.destroy();
+
+        // freeze the fight
+        this.player.body.setVelocity(0, 0);
+        this.enemyProjectiles.getChildren().slice().forEach( (p) => p.destroy() );
+
+        if (this.geekstar && this.geekstar.active) {
+            this.geekstar.cinematic = true;
+            this.geekstar.body.setVelocity(0, 0);
+            this.geekstar.play('geekstar');
+        }
+
+        // impact: camera shake + strobing background flash
+        this.cameras.main.shake(700, 0.02);
+
+        let flash = this.add.rectangle(config.width / 2, config.height / 2, config.width, config.height, 0xffffff)
+            .setDepth(90)
+            .setAlpha(0)
+            .setScrollFactor(0);
+
+        this.tweens.add({
+            targets: flash,
+            alpha: { from: 0.85, to: 0 },
+            duration: 130,
+            repeat: 4,
+            onComplete: () => flash.destroy()
+        });
+
+        // slow dramatic zoom onto the doomed player
+        this.time.delayedCall(700, () => {
+            this.cameras.main.pan(this.player.x, this.player.y, 1300, 'Sine.easeInOut');
+            this.cameras.main.zoomTo(2.2, 1300, 'Sine.easeInOut');
+        });
+
+        // hold the moment... low rumble while the player realizes their fate
+        this.time.delayedCall(2000, () => {
+            this.cameras.main.shake(900, 0.004);
+        });
+
+        this.time.delayedCall(2900, () => this.explodePlayer());
+
+        this.time.delayedCall(4100, () => this.showcaseGeekStar());
+
+        // white-out and transport to webpranks
+        this.time.delayedCall(5800, () => {
+            this.cameras.main.fadeOut(700, 255, 255, 255);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                this.transportToWebpranks();
+            });
+        });
+    }
+
+    explodePlayer() {
+        this.explosionSound.play();
+        this.cameras.main.shake(500, 0.03);
+
+        new Explosion(this, this.player.x, this.player.y);
+
+        // a million pieces
+        let pieceConfig = {
+            lifespan: { min: 800, max: 1800 },
+            speed: { min: 40, max: 650 },
+            angle: { min: 0, max: 360 },
+            scale: { start: 0.35, end: 0 },
+            alpha: { start: 1, end: 0 },
+            gravityY: 250,
+            blendMode: 'ADD',
+            emitting: false
+        };
+
+        let debrisBlue = this.add.particles(this.player.x, this.player.y, 'blue', pieceConfig);
+        let debrisRed = this.add.particles(this.player.x, this.player.y, 'red', pieceConfig);
+        debrisBlue.explode(600);
+        debrisRed.explode(400);
+
+        this.player.setVisible(false);
+        this.player.body.enable = false;
+    }
+
+    showcaseGeekStar() {
+        if (!this.geekstar || !this.geekstar.active)  return;
+
+        this.cameras.main.pan(this.geekstar.x, this.geekstar.y, 1000, 'Sine.easeInOut');
+        this.cameras.main.zoomTo(1.6, 1000, 'Sine.easeInOut');
+
+        this.tweens.add({
+            targets: this.geekstar,
+            scale: { from: 1, to: 1.25 },
+            duration: 350,
+            yoyo: true,
+            repeat: 2
+        });
+    }
+
+    transportToWebpranks() {
+        let params = new URLSearchParams(window.location.search);
+        // allow ?webpranks=http://localhost:5173 for local dev
+        let base = (params.get('webpranks') || 'https://webfun.click').replace(/\/$/, '');
+        let target = encodeURIComponent('https://www.microcenter.com');
+        let returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + window.location.search);
+
+        window.location.href = `${base}/meteor-smash/${target}/auto?t=10&return=${returnUrl}`;
     }
 
     // loop which runs continuously
     update() {
-        if (this.player.alpha >= 0.3) {
+        if (!this.takeoverStarted && this.player.alpha >= 0.3) {
             this.player.movePlayerManager();
 
             if (this.input.activePointer.isDown || Phaser.Input.Keyboard.JustDown(this.spacebar)) {
