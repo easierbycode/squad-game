@@ -78,7 +78,7 @@ export class GeekStar extends Phaser.GameObjects.Sprite {
 
     scheduleShooting() {
 
-        if (this.health == 0)  return;
+        if (this.health == 0 || this.cinematic)  return;
 
         this.currentVelocity = [this.body.velocity.x, this.body.velocity.y];
 
@@ -87,11 +87,15 @@ export class GeekStar extends Phaser.GameObjects.Sprite {
         let anim = this.play('geekstar-shoot');
 
         anim.once('animationcomplete', () => {
+            if (this.cinematic)  return;
+
             this.scene.enemyProjectiles.add( new GeekBullet(this.scene) );
 
             let animComplete = this.play('geekstar-shoot-complete');
 
             animComplete.once('animationcomplete', () => {
+                if (this.cinematic)  return;
+
                 this.play('geekstar');
 
                 this.body.setVelocity(...this.currentVelocity);
