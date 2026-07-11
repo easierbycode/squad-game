@@ -111,18 +111,28 @@ export class GeekStar extends Phaser.GameObjects.Sprite {
         // can't take damage while getting hit or shooting
         if (this.anims.getName() != 'geekstar')  return;
 
+        // already dying — the death cinematic owns us now
+        if (this.cinematic)  return;
+
         let damagePoints = enemy.damagePoints || 1;
         this.health -= damagePoints;
 
-        if (this.health == 0)  this.body.setVelocity(0, 0);
+        if (this.health <= 0) {
+            this.health = 0;
+            this.cinematic = true;          // stop shooting / moving
+            this.body.setVelocity(0, 0);
+        }
 
         let anim = this.play('geekstar-hit');
 
         anim.once('animationcomplete', () => {
-            if (this.health == 0) {
-                this.destroy()
+            if (this.health <= 0) {
+                // Hold an idle pose — the scene runs the death cinematic and
+                // will call our destroy() (the pixel explosion) on cue.
+                this.play('geekstar');
+                this.scene.startGeekStarDeathSequence();
             } else {
-                this.play('geekstar')
+                this.play('geekstar');
             }
         })
     }

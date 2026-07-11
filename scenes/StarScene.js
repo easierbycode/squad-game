@@ -170,13 +170,9 @@ export class StarScene extends Phaser.Scene {
         this.enemyProjectiles = this.add.group()
 
         this.physics.add.overlap(this.enemyProjectiles, this.player, (a, b) => {
-            let projectile = (a === this.player) ? b : a
-
-            if (projectile.texture.key === 'geek-bullet') {
-                this.startGeekStarTakeover(projectile)
-            } else if (!this.takeoverStarted) {
-                this.cameras.main.shake(100, 0.025)
-            }
+            // The takeover is now driven by the geek-star's death, not by its
+            // projectiles — a hit just rattles the camera.
+            if (!this.takeoverStarted)  this.cameras.main.shake(100, 0.025)
         })
 
         // group to hold all our projectiles
@@ -227,24 +223,16 @@ export class StarScene extends Phaser.Scene {
         this.takeoverStarted = false;
     }
 
-    // player hit by a geek-star projectile: shake, flash, slow MK2-style
-    // cinematic zoom, player explodes into a million pieces, then geek-star
-    // takes over and we transport to the webpranks meteor scene
-    startGeekStarTakeover(projectile) {
+    // Geek-star's HP has hit 0. Run the death cinematic — the player is torn
+    // apart, the camera pans to the geek-star, it detonates into a shower of
+    // pixels, then we hand off to the embedded meteor-smash bonus round.
+    startGeekStarDeathSequence() {
         if (this.takeoverStarted)  return;
         this.takeoverStarted = true;
-
-        projectile.destroy();
 
         // freeze the fight
         this.player.body.setVelocity(0, 0);
         this.enemyProjectiles.getChildren().slice().forEach( (p) => p.destroy() );
-
-        if (this.geekstar && this.geekstar.active) {
-            this.geekstar.cinematic = true;
-            this.geekstar.body.setVelocity(0, 0);
-            this.geekstar.play('geekstar');
-        }
 
         // impact: camera shake + strobing background flash
         this.cameras.main.shake(700, 0.02);
@@ -262,26 +250,22 @@ export class StarScene extends Phaser.Scene {
             onComplete: () => flash.destroy()
         });
 
-        // slow dramatic zoom onto the doomed player
-        this.time.delayedCall(700, () => {
-            this.cameras.main.pan(this.player.x, this.player.y, 1300, 'Sine.easeInOut');
-            this.cameras.main.zoomTo(2.2, 1300, 'Sine.easeInOut');
+        // pan / zoom onto the geek-star as the moment turns
+        this.time.delayedCall(500, () => this.showcaseGeekStar());
+
+        // the player is torn apart
+        this.time.delayedCall(1500, () => this.explodePlayer());
+
+        // ...then the geek-star detonates into a shower of pixels
+        this.time.delayedCall(3000, () => {
+            if (this.geekstar && this.geekstar.active)  this.geekstar.destroy();
         });
 
-        // hold the moment... low rumble while the player realizes their fate
-        this.time.delayedCall(2000, () => {
-            this.cameras.main.shake(900, 0.004);
-        });
-
-        this.time.delayedCall(2900, () => this.explodePlayer());
-
-        this.time.delayedCall(4100, () => this.showcaseGeekStar());
-
-        // white-out and transport to webpranks
-        this.time.delayedCall(5800, () => {
+        // white-out and hand off to the meteor-smash bonus round
+        this.time.delayedCall(4400, () => {
             this.cameras.main.fadeOut(700, 255, 255, 255);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-                this.transportToWebpranks();
+                this.mountMeteorSmash();
             });
         });
     }
@@ -328,14 +312,88 @@ export class StarScene extends Phaser.Scene {
         });
     }
 
-    transportToWebpranks() {
+    // Embed the meteor-smash prank as a full-screen iframe (rather than
+    // redirecting the whole page). Same-origin in production
+    // (easierbycode.com), so a postMessage handshake hands control back when
+    // the 10-second bonus round ends.
+    mountMeteorSmash() {
         let params = new URLSearchParams(window.location.search);
-        // allow ?webpranks=http://localhost:5173 for local dev
-        let base = (params.get('webpranks') || 'https://webfun.click').replace(/\/$/, '');
+        // allow ?webpranks=http://localhost:5199 for local dev
+        let base = (params.get('webpranks') || 'https://easierbycode.com/webpranks').replace(/\/$/, '');
         let target = encodeURIComponent('https://www.microcenter.com');
-        let returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + window.location.search);
+        let seconds = 10;
 
-        window.location.href = `${base}/meteor-smash/${target}/auto?t=10&return=${returnUrl}`;
+        let iframe = document.createElement('iframe');
+        iframe.id = 'meteor-smash-frame';
+        iframe.src = `${base}/meteor-smash/${target}/auto?t=${seconds}&embed=1`;
+        iframe.allow = 'autoplay; fullscreen; gamepad';
+        iframe.setAttribute('allowfullscreen', '');
+        Object.assign(iframe.style, {
+            position: 'fixed', inset: '0', width: '100vw', height: '100vh',
+            border: '0', margin: '0', padding: '0', zIndex: '2147483647', background: '#000'
+        });
+        document.body.appendChild(iframe);
+        this.meteorFrame = iframe;
+
+        // listen for the bonus round to report back (with its score)
+        this.onMeteorMessage = (event) => {
+            let data = event && event.data;
+            if (!data || data.source !== 'meteor-smash')  return;
+            if (data.type === 'done')  this.endMeteorSmash(data.score || 0);
+        };
+        window.addEventListener('message', this.onMeteorMessage);
+
+        // safety net: if the bonus never reports back (e.g. the fetch backend is
+        // down) recover the game anyway.
+        this.meteorSafety = window.setTimeout(() => this.endMeteorSmash(0), (seconds + 15) * 1000);
+
+        // freeze the game underneath while the bonus round plays on top
+        this.scene.pause();
+    }
+
+    endMeteorSmash(score) {
+        if (!this.meteorFrame)  return;    // already handled
+
+        window.clearTimeout(this.meteorSafety);
+        window.removeEventListener('message', this.onMeteorMessage);
+        this.meteorFrame.remove();
+        this.meteorFrame = null;
+
+        // resume the game and restore the view
+        this.scene.resume();
+        this.cameras.main.fadeIn(500, 255, 255, 255);
+        this.cameras.main.pan(config.width / 2, config.height / 2, 600, 'Sine.easeInOut');
+        this.cameras.main.zoomTo(1, 600, 'Sine.easeInOut');
+
+        // respawn the player
+        this.player.setVisible(true);
+        this.player.body.enable = true;
+        this.player.setPosition(config.width / 2, config.height - 64);
+        this.player.alpha = 1;
+
+        this.takeoverStarted = false;
+
+        this.showBonusScore(score);
+    }
+
+    showBonusScore(score) {
+        let label = this.add.text(config.width / 2, config.height / 2, `BONUS  +${score}`, {
+            fontFamily: 'Arial Black, Arial, sans-serif',
+            fontSize: '32px',
+            color: '#ffe11a',
+            stroke: '#000000',
+            strokeThickness: 6,
+            align: 'center'
+        }).setOrigin(0.5).setScrollFactor(0).setDepth(200);
+
+        this.tweens.add({
+            targets: label,
+            y: config.height / 2 - 80,
+            alpha: { from: 1, to: 0 },
+            duration: 2200,
+            ease: 'Cubic.easeOut',
+            onComplete: () => label.destroy()
+        });
     }
 
     // loop which runs continuously
@@ -359,7 +417,7 @@ export class StarScene extends Phaser.Scene {
 
         if (this.geekstar && this.geekstar.health > 0) {
             Phaser.Actions.RotateAroundDistance(this.group.getChildren(), this.geekstar, 0.1, 100);
-        } else {
+        } else if (!this.takeoverStarted) {
             this.group.getChildren().forEach( (g) => {
                 this.tweens.add({
                     targets: g,
