@@ -331,7 +331,7 @@ export class StarScene extends Phaser.Scene {
     transportToWebpranks() {
         let params = new URLSearchParams(window.location.search);
         // allow ?webpranks=http://localhost:5173 for local dev
-        let base = (params.get('webpranks') || 'https://webfun.click').replace(/\/$/, '');
+        let base = (params.get('webpranks') || 'https://easierbycode.com/webpranks').replace(/\/$/, '');
         let target = encodeURIComponent('https://www.microcenter.com');
         let returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + window.location.search);
 
