@@ -158,6 +158,17 @@ export class GeekStar extends Phaser.GameObjects.Sprite {
     }
 
     destroy() {
+        // nothing of ours outlives us: stop the shot timer and clear any bullet
+        // still in flight, so a dead geek-star can't land a late hit
+        this.cinematic = true;
+        this.enemyTimer.remove();
+
+        if (this.scene.enemyProjectiles) {
+            this.scene.enemyProjectiles.getChildren()
+                .filter( (b) => b instanceof GeekBullet )
+                .forEach( (b) => b.destroy() );
+        }
+
         // let lifespan = Phaser.Math.Between(250, 500);
         let lifespan = Phaser.Math.Between(1000, 1250);
         let particleConfig = {

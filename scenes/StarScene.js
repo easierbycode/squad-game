@@ -183,7 +183,9 @@ export class StarScene extends Phaser.Scene {
         this.geekCar = new GeekCar(this, -587, 35)
         this.sentinels.add( this.geekCar )
 
-        this.physics.add.overlap(this.sentinels, this.projectiles, (s, p) => {
+        // kept so the death cinematic can switch enemy hits off while it runs
+        this.sentinelHits = this.physics.add.overlap(this.sentinels, this.projectiles, (s, p) => {
+            if (this.takeoverStarted)  return;
             s.damage( s, p );
         })
 
@@ -228,11 +230,18 @@ export class StarScene extends Phaser.Scene {
     // pixels, then we hand off to the embedded meteor-smash bonus round.
     startGeekStarDeathSequence() {
         if (this.takeoverStarted)  return;
+        // only the geek-star's own death runs this — never a stray hit landing
+        // after it is already gone
+        if (!this.geekstar || !this.geekstar.active)  return;
         this.takeoverStarted = true;
 
-        // freeze the fight
+        // freeze the fight: stop the player, drop every shot in flight (an
+        // in-flight beam would otherwise keep damaging sentinels mid-cinematic)
+        // and switch the enemy-hit overlap off for the duration
         this.player.body.setVelocity(0, 0);
         this.enemyProjectiles.getChildren().slice().forEach( (p) => p.destroy() );
+        this.projectiles.getChildren().slice().forEach( (p) => p.destroy() );
+        this.sentinelHits.active = false;
 
         // impact: camera shake + strobing background flash
         this.cameras.main.shake(700, 0.02);
@@ -372,6 +381,7 @@ export class StarScene extends Phaser.Scene {
         this.player.alpha = 1;
 
         this.takeoverStarted = false;
+        this.sentinelHits.active = true;
 
         this.showBonusScore(score);
     }
