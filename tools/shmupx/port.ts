@@ -554,6 +554,36 @@ async function main() {
   //    all read it as one of their own
   const atlasFrames: Record<string, AtlasFrame> = {};
   for (const [k, v] of Object.entries(atlas.frames)) atlasFrames[encodeFirebaseKey(k)] = v;
+
+  // The title's portrait. 2028.Ai's title slides in game_ui's titleG.gif — G,
+  // its pilot, a 256x364 plate that rests at (5, 20) — and a game's own
+  // `uiAtlases.game_ui` frame of that name takes its place. Ours is the
+  // geek-star (the Geek Squad logo, frame 0) on a plate the same size, set
+  // where G's face sits: under the name logo (y 75) and subtitle (y 130) the
+  // runtime draws for a game with no title art of its own, above TAP OR
+  // CLICK START (y 330). The logo and subtitle stay the runtime's: a custom
+  // one here would switch those defaults off.
+  const TITLE_G = { w: 256, h: 364, cx: 123, cy: 230 };
+  const star = rasters.get("geekstar0")!;
+  const plate = newRaster(TITLE_G.w, TITLE_G.h);
+  blit(plate, star, Math.round(TITLE_G.cx - star.width / 2), Math.round(TITLE_G.cy - star.height / 2));
+  const platePng = encodePng(plate);
+  await ensureDir(join(outDir, "title"));
+  await Deno.writeFile(join(outDir, "title", "titleG.png"), platePng);
+  const uiAtlases = {
+    game_ui: {
+      imageDataURL: `data:image/png;base64,${encodeBase64(platePng)}`,
+      frames: {
+        [encodeFirebaseKey("titleG.gif")]: {
+          frame: { x: 0, y: 0, w: TITLE_G.w, h: TITLE_G.h },
+          rotated: false,
+          trimmed: false,
+          spriteSourceSize: { x: 0, y: 0, w: TITLE_G.w, h: TITLE_G.h },
+          sourceSize: { w: TITLE_G.w, h: TITLE_G.h },
+        } satisfies AtlasFrame,
+      },
+    },
+  };
   let gameId = await mintGameId(name);
   if (args.push) {
     try {
@@ -579,6 +609,7 @@ async function main() {
     godMode: false,
     atlasFrames,
     atlasImageDataURL: `data:image/png;base64,${encodeBase64(pngBytes)}`,
+    uiAtlases,
     savedAt: { ".sv": "timestamp" },
   };
   const recordPath = join(outDir, `${name}.record.json`);

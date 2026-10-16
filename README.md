@@ -19,6 +19,11 @@ deno task shmupx:push    # ...and publishes it to the cloud as levels/gs
   <https://codemonkey.games/games/2028-ai?level=gs> and at
   <https://gs.codemonkey.games/> (the level subdomain goes straight to the game,
   never the editor, once `*.codemonkey.games` is a domain on the Deploy app).
+- `shmupx/title/titleG.png` — the title's portrait: the geek-star (the Geek
+  Squad logo) on the 256x364 plate 2028.Ai's G fills, carried by the record as
+  its `game_ui` `titleG.gif`. The logo and subtitle are the runtime's defaults
+  for a game with no title art of its own — the name set in Orbitron, and the
+  genre plate — so the record carries neither.
 
 The port is one stage ending on the geek-star. The PS5 controllers and the
 headphone invader, which the original launches after the geek-star falls, come
