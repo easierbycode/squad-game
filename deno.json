@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "shmupx:port": "deno run -A tools/shmupx/port.ts",
+    "shmupx:push": "deno run -A tools/shmupx/port.ts --push"
+  }
+}

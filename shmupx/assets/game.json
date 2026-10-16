@@ -1,0 +1,369 @@
+{
+  "stage0": {
+    "enemylist": [
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "E0",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "E0"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "F0",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "B9",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "D0",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "D0",
+        "00",
+        "00",
+        "00",
+        "D0",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "C0",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "C0",
+        "00",
+        "00",
+        "00",
+        "C0",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "A0",
+        "00",
+        "A0",
+        "00",
+        "A0",
+        "00",
+        "00"
+      ],
+      [
+        "00",
+        "00",
+        "A0",
+        "00",
+        "A0",
+        "00",
+        "00",
+        "00"
+      ]
+    ]
+  },
+  "playerData": {
+    "name": "squad",
+    "maxHp": 3,
+    "spDamage": 50,
+    "speed": 150,
+    "defaultShootName": "normal",
+    "defaultShootSpeed": "speed_normal",
+    "texture": [
+      "bby-ship"
+    ],
+    "shootNormal": {
+      "name": "normal",
+      "damage": 1,
+      "hp": 1,
+      "interval": 6,
+      "texture": [
+        "beam0",
+        "beam1"
+      ]
+    },
+    "shootBig": {
+      "name": "big",
+      "damage": 2,
+      "hp": 100,
+      "interval": 10,
+      "texture": [
+        "beam0",
+        "beam1"
+      ]
+    },
+    "shoot3way": {
+      "name": "3way",
+      "damage": 1,
+      "hp": 1,
+      "interval": 8,
+      "texture": [
+        "beam0",
+        "beam1"
+      ]
+    },
+    "barrier": {
+      "time": 4,
+      "texture": [
+        "barrier0"
+      ]
+    }
+  },
+  "enemyData": {
+    "enemyA": {
+      "name": "cyber-octopus",
+      "score": 100,
+      "spgage": 4,
+      "hp": 3,
+      "speed": 1,
+      "interval": -1,
+      "texture": [
+        "cyber-octopus0",
+        "cyber-octopus1",
+        "cyber-octopus2"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 10,
+      "bulletData": null
+    },
+    "enemyB": {
+      "name": "geek-car",
+      "score": 500,
+      "spgage": 10,
+      "hp": 10,
+      "speed": 0.6,
+      "interval": -1,
+      "texture": [
+        "geek-car"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 8,
+      "bulletData": null
+    },
+    "enemyC": {
+      "name": "laptop",
+      "score": 200,
+      "spgage": 6,
+      "hp": 4,
+      "speed": 1,
+      "interval": -1,
+      "texture": [
+        "laptop0",
+        "laptop1"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 10,
+      "bulletData": null
+    },
+    "enemyD": {
+      "name": "wrong-password",
+      "score": 200,
+      "spgage": 6,
+      "hp": 4,
+      "speed": 0.5,
+      "interval": -1,
+      "texture": [
+        "wrong-password2",
+        "wrong-password3",
+        "wrong-password4",
+        "wrong-password5",
+        "wrong-password6",
+        "wrong-password7",
+        "wrong-password8",
+        "wrong-password9",
+        "wrong-password10",
+        "wrong-password11"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 10,
+      "bulletData": null
+    },
+    "enemyE": {
+      "name": "ps5-controller",
+      "score": 800,
+      "spgage": 10,
+      "hp": 20,
+      "speed": 0.5,
+      "interval": 120,
+      "texture": [
+        "ps5-controller0"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 10,
+      "bulletData": {
+        "name": "ps5-bullet",
+        "score": 100,
+        "spgage": 2,
+        "hp": 1,
+        "speed": 4,
+        "damage": 1,
+        "texture": [
+          "ps5-bullet0",
+          "ps5-bullet1"
+        ]
+      }
+    },
+    "enemyF": {
+      "name": "headphone-invader",
+      "score": 1500,
+      "spgage": 20,
+      "hp": 20,
+      "speed": 0.4,
+      "interval": -1,
+      "texture": [
+        "headphone-invader0",
+        "headphone-invader1"
+      ],
+      "shadowReverse": true,
+      "shadowOffsetY": 14,
+      "bulletData": null
+    }
+  },
+  "bossData": {
+    "boss0": {
+      "name": "geekstar",
+      "score": 5000,
+      "spgage": 30,
+      "hp": 240,
+      "interval": 100,
+      "shadowReverse": true,
+      "shadowOffsetY": 20,
+      "anim": {
+        "idle": [
+          "geekstar0",
+          "geekstar1"
+        ],
+        "shoot": [
+          "geekstar0",
+          "geekstar5",
+          "geekstar4",
+          "geekstar3"
+        ],
+        "attack": [
+          "geekstar5",
+          "geekstar4"
+        ],
+        "warp": [
+          "geekstar3"
+        ]
+      },
+      "bulletData": {
+        "name": "geek-bullet",
+        "score": 100,
+        "spgage": 2,
+        "hp": 1,
+        "speed": 2.5,
+        "damage": 1,
+        "texture": [
+          "geek-bullet"
+        ]
+      }
+    }
+  },
+  "meta": {
+    "version": "1.0",
+    "source": "squad-game",
+    "origin": "https://github.com/easierbycode/squad-game"
+  }
+}

@@ -1,0 +1,635 @@
+{
+  "frames": {
+    "geekstar0": {
+      "frame": {
+        "x": 4,
+        "y": 4,
+        "w": 170,
+        "h": 105
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 170,
+        "h": 105
+      },
+      "sourceSize": {
+        "w": 170,
+        "h": 105
+      }
+    },
+    "geekstar1": {
+      "frame": {
+        "x": 178,
+        "y": 4,
+        "w": 170,
+        "h": 105
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 170,
+        "h": 105
+      },
+      "sourceSize": {
+        "w": 170,
+        "h": 105
+      }
+    },
+    "geekstar3": {
+      "frame": {
+        "x": 352,
+        "y": 4,
+        "w": 170,
+        "h": 105
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 170,
+        "h": 105
+      },
+      "sourceSize": {
+        "w": 170,
+        "h": 105
+      }
+    },
+    "geekstar4": {
+      "frame": {
+        "x": 526,
+        "y": 4,
+        "w": 170,
+        "h": 105
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 170,
+        "h": 105
+      },
+      "sourceSize": {
+        "w": 170,
+        "h": 105
+      }
+    },
+    "geekstar5": {
+      "frame": {
+        "x": 700,
+        "y": 4,
+        "w": 170,
+        "h": 105
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 170,
+        "h": 105
+      },
+      "sourceSize": {
+        "w": 170,
+        "h": 105
+      }
+    },
+    "headphone-invader0": {
+      "frame": {
+        "x": 874,
+        "y": 4,
+        "w": 95,
+        "h": 71
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 95,
+        "h": 71
+      },
+      "sourceSize": {
+        "w": 95,
+        "h": 71
+      }
+    },
+    "headphone-invader1": {
+      "frame": {
+        "x": 973,
+        "y": 4,
+        "w": 95,
+        "h": 71
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 95,
+        "h": 71
+      },
+      "sourceSize": {
+        "w": 95,
+        "h": 71
+      }
+    },
+    "barrier0": {
+      "frame": {
+        "x": 1072,
+        "y": 4,
+        "w": 64,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 64
+      }
+    },
+    "laptop0": {
+      "frame": {
+        "x": 1140,
+        "y": 4,
+        "w": 74,
+        "h": 58
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 74,
+        "h": 58
+      },
+      "sourceSize": {
+        "w": 74,
+        "h": 58
+      }
+    },
+    "laptop1": {
+      "frame": {
+        "x": 1218,
+        "y": 4,
+        "w": 74,
+        "h": 58
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 74,
+        "h": 58
+      },
+      "sourceSize": {
+        "w": 74,
+        "h": 58
+      }
+    },
+    "bby-ship": {
+      "frame": {
+        "x": 1296,
+        "y": 4,
+        "w": 32,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 50
+      }
+    },
+    "ps5-bullet0": {
+      "frame": {
+        "x": 1332,
+        "y": 4,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "ps5-bullet1": {
+      "frame": {
+        "x": 1368,
+        "y": 4,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "cyber-octopus0": {
+      "frame": {
+        "x": 1404,
+        "y": 4,
+        "w": 29,
+        "h": 29
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 29,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 29,
+        "h": 29
+      }
+    },
+    "cyber-octopus1": {
+      "frame": {
+        "x": 1437,
+        "y": 4,
+        "w": 29,
+        "h": 29
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 29,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 29,
+        "h": 29
+      }
+    },
+    "cyber-octopus2": {
+      "frame": {
+        "x": 1470,
+        "y": 4,
+        "w": 29,
+        "h": 29
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 29,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 29,
+        "h": 29
+      }
+    },
+    "ps5-controller0": {
+      "frame": {
+        "x": 1503,
+        "y": 4,
+        "w": 44,
+        "h": 26
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 26
+      },
+      "sourceSize": {
+        "w": 44,
+        "h": 26
+      }
+    },
+    "geek-car": {
+      "frame": {
+        "x": 1551,
+        "y": 4,
+        "w": 65,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 65,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 65,
+        "h": 25
+      }
+    },
+    "wrong-password2": {
+      "frame": {
+        "x": 1620,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password3": {
+      "frame": {
+        "x": 1654,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password4": {
+      "frame": {
+        "x": 1688,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password5": {
+      "frame": {
+        "x": 1722,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password6": {
+      "frame": {
+        "x": 1756,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password7": {
+      "frame": {
+        "x": 1790,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password8": {
+      "frame": {
+        "x": 1824,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password9": {
+      "frame": {
+        "x": 1858,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password10": {
+      "frame": {
+        "x": 1892,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "wrong-password11": {
+      "frame": {
+        "x": 1926,
+        "y": 4,
+        "w": 30,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 22
+      }
+    },
+    "geek-bullet": {
+      "frame": {
+        "x": 1960,
+        "y": 4,
+        "w": 15,
+        "h": 10
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 10
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 10
+      }
+    },
+    "beam0": {
+      "frame": {
+        "x": 1979,
+        "y": 4,
+        "w": 22,
+        "h": 6
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 22,
+        "h": 6
+      },
+      "sourceSize": {
+        "w": 22,
+        "h": 6
+      }
+    },
+    "beam1": {
+      "frame": {
+        "x": 2005,
+        "y": 4,
+        "w": 22,
+        "h": 6
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 22,
+        "h": 6
+      },
+      "sourceSize": {
+        "w": 22,
+        "h": 6
+      }
+    }
+  },
+  "meta": {
+    "app": "squad-game tools/shmupx/port.ts",
+    "format": "RGBA8888",
+    "image": "img/game_asset.png",
+    "scale": "1",
+    "size": {
+      "w": 2031,
+      "h": 113
+    },
+    "version": "1.0"
+  }
+}
